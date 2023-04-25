@@ -1,0 +1,578 @@
+hduser@adminpc-Vostro-14-5459:/usr/local/hive/bin$ ./hive
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/local/hive/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Hive Session ID = 1e896619-abb2-4238-8613-d0286b73a899
+
+Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-3.1.2.jar!/hive-log4j2.properties Async: true
+Hive Session ID = b9687ea6-82be-42a8-b4a6-e7f1a37686cc
+Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+hive> show databases;
+OK
+default
+Time taken: 0.717 seconds, Fetched: 1 row(s)
+hive> create database db_hive;
+OK
+Time taken: 0.204 seconds
+hive> use db_hive;
+OK
+Time taken: 0.048 seconds
+hive> create table flight (flightId int,origin string, destination string,arrival_time int,departure_time int,arrival_delay int,departure_delay int) row format delimited fields terminated by "," stored as textfile;
+OK
+Time taken: 5.989 seconds
+hive> describe flight;
+OK
+flightid            	int                 	                    
+origin              	string              	                    
+destination         	string              	                    
+arrival_time        	int                 	                    
+departure_time      	int                 	                    
+arrival_delay       	int                 	                    
+departure_delay     	int                 	                    
+Time taken: 0.538 seconds, Fetched: 7 row(s)
+hive> LOAD DATA LOCAL INPATH '/home/hduser1/abc.txt' OVERWRITE INTO TABLE TestData;
+FAILED: SemanticException [Error 10001]: Line 1:68 Table not found 'TestData'
+hive> load data local inpath '/home/hduser/flight_updated.csv' overwrite into table flight;
+Loading data to table db_hive.flight
+OK
+Time taken: 6.73 seconds
+hive> select * from flight;
+OK
+335	IAD	TPA	2211	2003	-14	8
+3231	IAD	TPA	1002	754	2	19
+448	IND	BWI	804	628	14	8
+1746	IND	BWI	1054	926	-6	-4
+3920	IND	BWI	1959	1829	34	34
+378	IND	JAX	2121	1940	11	25
+509	IND	LAS	2037	1937	57	67
+535	IND	LAS	1132	1039	-18	-1
+11	IND	MCI	652	617	2	2
+810	IND	MCI	1639	1620	-16	0
+100	IND	MCO	916	706	1	6
+1333	IND	MCO	1845	1644	80	94
+829	IND	MDW	1426	1426	1	-4
+1016	IND	MDW	720	715	10	0
+1827	IND	MDW	1651	1702	-4	2
+2272	IND	MDW	1021	1029	11	9
+675	IND	PHX	1640	1452	15	27
+1144	IND	PHX	940	754	-15	9
+4	IND	TPA	1526	1323	16	28
+54	ISP	BWI	1512	1416	37	51
+68	ISP	BWI	807	706	-3	1
+623	ISP	BWI	1754	1657	19	32
+717	ISP	BWI	1956	1900	6	20
+1244	ISP	BWI	1133	1039	-7	9
+2101	ISP	BWI	902	801	-8	1
+2553	ISP	BWI	1619	1520	14	25
+188	ISP	FLL	1657	1422	47	87
+1754	ISP	FLL	2239	1954	4	29
+2275	ISP	FLL	921	636	-24	1
+550	ISP	LAS	958	734	-22	4
+362	ISP	MCO	2334	2107	64	82
+543	ISP	MCO	1234	1008	-21	3
+1112	ISP	MCO	953	712	-7	2
+1397	ISP	MCO	1546	1312	-4	12
+3398	ISP	MCO	1715	1449	-5	19
+3480	ISP	MCO	1859	1634	14	39
+300	ISP	MDW	935	831	-20	1
+422	ISP	MDW	1927	1812	72	82
+1837	ISP	MDW	1235	1127	5	22
+2871	ISP	MDW	1531	1424	11	29
+1056	ISP	PBI	1559	1326	29	56
+2175	ISP	PBI	2019	1749	-11	24
+3319	ISP	PBI	958	726	-22	6
+3667	ISP	RSW	929	646	-26	6
+2006	ISP	TPA	1428	1153	-12	13
+3858	ISP	TPA	1802	1528	-8	18
+3928	ISP	TPA	907	634	-28	-1
+534	JAN	BWI	1148	831	8	1
+3244	JAN	BWI	1806	1450	21	15
+186	JAN	HOU	2354	2245	304	315
+971	JAN	HOU	724	615	-11	0
+2124	JAN	HOU	1303	1150	-2	5
+3154	JAN	HOU	2135	2025	35	45
+1035	JAN	MCO	1314	1038	49	53
+205	JAN	MDW	2123	1900	38	10
+449	JAN	MDW	851	700	-9	0
+3430	JAX	BHM	959	948	19	23
+1580	JAX	BNA	725	646	30	26
+2195	JAX	BNA	1136	1110	26	30
+2804	JAX	BNA	1603	1535	-7	0
+3428	JAX	BNA	1942	1919	-8	4
+433	JAX	BWI	1245	1053	5	-2
+1331	JAX	BWI	1623	1433	-2	-7
+3504	JAX	BWI	2158	2015	3	5
+378	JAX	FLL	2244	2139	4	9
+640	JAX	FLL	1602	1500	-13	0
+1396	JAX	FLL	1000	850	0	0
+2189	JAX	FLL	752	646	-3	1
+3312	JAX	FLL	1328	1221	-2	1
+3948	JAX	FLL	1841	1738	1	8
+54	JAX	HOU	1936	1813	31	38
+2272	JAX	IND	1001	802	6	12
+549	JAX	ORF	1946	1820	-9	-5
+3604	JAX	ORF	953	821	8	1
+23	JAX	PHL	1941	1734	36	44
+1232	JAX	PHL	926	712	11	12
+977	JAX	TPA	1410	1318	10	8
+1574	JAX	TPA	1052	958	62	58
+2019	JAX	TPA	1950	1859	5	9
+500	LAS	ABQ	1753	1538	43	53
+778	LAS	ABQ	1151	933	-9	-2
+890	LAS	ABQ	102	2248	77	83
+1171	LAS	ABQ	1550	1327	50	57
+1320	LAS	ABQ	846	624	-4	-1
+1925	LAS	ABQ	1833	1614	8	14
+2457	LAS	ABQ	2136	1917	-4	2
+302	LAS	ALB	148	1832	78	97
+1079	LAS	AMA	1633	1229	38	34
+155	LAS	AUS	1724	1256	4	16
+2021	LAS	AUS	144	2118	54	63
+3222	LAS	AUS	1334	905	4	15
+1018	LAS	BDL	114	1739	49	59
+3948	LAS	BHM	1426	906	-4	1
+249	LAS	BNA	1339	816	-1	1
+419	LAS	BNA	1841	1325	31	45
+2032	LAS	BNA	2030	1506	20	26
+3940	LAS	BNA	155	2039	60	69
+71	LAS	BOI	1209	924	-1	4
+538	LAS	BOI	1849	1611	24	36
+2383	LAS	BUF	117	1824	52	69
+Time taken: 4.733 seconds, Fetched: 100 row(s)
+hive> select sum(arrival_time) from flight;
+Query ID = hduser_20230425192316_c6814c4b-efff-49af-8f24-2b69a2c65298
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:23:20,120 Stage-1 map = 100%,  reduce = 0%
+2023-04-25 19:23:21,143 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1890346875_0001
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 10992 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+138090
+Time taken: 5.178 seconds, Fetched: 1 row(s)
+hive> select avg(arrival_time) from flight;
+Query ID = hduser_20230425192341_9db3e17f-55ac-4d6c-9d7c-1f750fffcbb8
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:23:42,968 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local323367760_0002
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 16488 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+1380.9
+Time taken: 1.921 seconds, Fetched: 1 row(s)
+hive> select sum(departure_time) from flight;
+Query ID = hduser_20230425192403_8d8c1900-1e6b-4653-b52d-c7b3f8696481
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:24:04,954 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local960892165_0003
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 21984 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+131782
+Time taken: 1.803 seconds, Fetched: 1 row(s)
+hive> select avg(departure_time) from flight;
+Query ID = hduser_20230425192422_f93a9929-4d53-49c2-b79e-7dc0a2fb1868
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:24:24,638 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local622973369_0004
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 27480 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+1317.82
+Time taken: 1.799 seconds, Fetched: 1 row(s)
+hive> select max(arrival_time) from flight;
+Query ID = hduser_20230425192507_1fc7945a-a1de-444f-8f95-7b04b9f0f10d
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:25:09,610 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1744780473_0005
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 32976 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+2354
+Time taken: 1.934 seconds, Fetched: 1 row(s)
+hive> select min(arrival_time) from flight;
+Query ID = hduser_20230425192516_a9303670-392f-449d-a678-1f40311a8efe
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:25:18,592 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1425375299_0006
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 38472 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+102
+Time taken: 1.668 seconds, Fetched: 1 row(s)
+hive> select max(departure_time) from flight;
+Query ID = hduser_20230425192535_f6c21efb-8b65-4596-bfb1-11af3e1057b0
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:25:37,333 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1541037039_0007
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 43968 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+2248
+Time taken: 1.737 seconds, Fetched: 1 row(s)
+hive> select min(departure_time) from flight;
+Query ID = hduser_20230425192544_c9e45361-de55-44a5-b4bf-5673cc033c45
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:25:46,088 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local84247059_0008
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 49464 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+615
+Time taken: 1.768 seconds, Fetched: 1 row(s)
+hive> select count(flightID) from flight;
+Query ID = hduser_20230425192655_ab6aec8d-3ae8-4665-8747-8ee482af3487
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:26:57,624 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local578449616_0009
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 54960 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+100
+Time taken: 1.719 seconds, Fetched: 1 row(s)
+hive> select count(arrival_time) from flight;
+Query ID = hduser_20230425192730_0c1cc0d4-90d4-4b40-8548-30696b7b5447
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:27:32,025 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local593517336_0010
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 60456 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+100
+Time taken: 1.85 seconds, Fetched: 1 row(s)
+hive> select count(departure_time) from flight;
+Query ID = hduser_20230425192741_ebb1e7cd-20d2-49c2-8c6a-d4649f83c3ae
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:27:43,113 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local848859257_0011
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 65952 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+100
+Time taken: 1.818 seconds, Fetched: 1 row(s)
+hive> select count(*) from flight;
+Query ID = hduser_20230425192802_95b30dc8-8cc6-446e-bbb5-426012d1de87
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:28:04,433 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1255954155_0012
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 71448 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+100
+Time taken: 1.853 seconds, Fetched: 1 row(s)
+hive> select origin,count(*) from flight group by origin;
+Query ID = hduser_20230425193508_21fe16da-e799-4c5f-8443-0cc12a12580a
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:35:10,328 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local366020670_0014
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 82440 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+IAD	2
+IND	17
+ISP	28
+JAN	9
+JAX	23
+LAS	21
+Time taken: 1.761 seconds, Fetched: 6 row(s)
+hive> select destination,count(*) from flight group by destination;
+Query ID = hduser_20230425193536_80e6a35d-9bcd-4126-a3e7-dc9cc966b1b1
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2023-04-25 19:35:38,333 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local897996974_0015
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 87936 HDFS Write: 5496 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+ABQ	7
+ALB	1
+AMA	1
+AUS	3
+BDL	1
+BHM	2
+BNA	8
+BOI	2
+BUF	1
+BWI	15
+FLL	9
+HOU	5
+IND	1
+JAX	1
+LAS	3
+MCI	2
+MCO	9
+MDW	10
+ORF	2
+PBI	3
+PHL	2
+PHX	2
+RSW	1
+TPA	9
+Time taken: 1.693 seconds, Fetched: 24 row(s)
+hive> describe flight;
+OK
+flightid            	int                 	                    
+origin              	string              	                    
+destination         	string              	                    
+arrival_time        	int                 	                    
+departure_time      	int                 	                    
+arrival_delay       	int                 	                    
+departure_delay     	int                 	                    
+Time taken: 0.087 seconds, Fetched: 7 row(s)
+hive> select * from flight;
+OK
+335	IAD	TPA	2211	2003	-14	8
+3231	IAD	TPA	1002	754	2	19
+448	IND	BWI	804	628	14	8
+1746	IND	BWI	1054	926	-6	-4
+3920	IND	BWI	1959	1829	34	34
+378	IND	JAX	2121	1940	11	25
+509	IND	LAS	2037	1937	57	67
+535	IND	LAS	1132	1039	-18	-1
+11	IND	MCI	652	617	2	2
+810	IND	MCI	1639	1620	-16	0
+100	IND	MCO	916	706	1	6
+1333	IND	MCO	1845	1644	80	94
+829	IND	MDW	1426	1426	1	-4
+1016	IND	MDW	720	715	10	0
+1827	IND	MDW	1651	1702	-4	2
+2272	IND	MDW	1021	1029	11	9
+675	IND	PHX	1640	1452	15	27
+1144	IND	PHX	940	754	-15	9
+4	IND	TPA	1526	1323	16	28
+54	ISP	BWI	1512	1416	37	51
+68	ISP	BWI	807	706	-3	1
+623	ISP	BWI	1754	1657	19	32
+717	ISP	BWI	1956	1900	6	20
+1244	ISP	BWI	1133	1039	-7	9
+2101	ISP	BWI	902	801	-8	1
+2553	ISP	BWI	1619	1520	14	25
+188	ISP	FLL	1657	1422	47	87
+1754	ISP	FLL	2239	1954	4	29
+2275	ISP	FLL	921	636	-24	1
+550	ISP	LAS	958	734	-22	4
+362	ISP	MCO	2334	2107	64	82
+543	ISP	MCO	1234	1008	-21	3
+1112	ISP	MCO	953	712	-7	2
+1397	ISP	MCO	1546	1312	-4	12
+3398	ISP	MCO	1715	1449	-5	19
+3480	ISP	MCO	1859	1634	14	39
+300	ISP	MDW	935	831	-20	1
+422	ISP	MDW	1927	1812	72	82
+1837	ISP	MDW	1235	1127	5	22
+2871	ISP	MDW	1531	1424	11	29
+1056	ISP	PBI	1559	1326	29	56
+2175	ISP	PBI	2019	1749	-11	24
+3319	ISP	PBI	958	726	-22	6
+3667	ISP	RSW	929	646	-26	6
+2006	ISP	TPA	1428	1153	-12	13
+3858	ISP	TPA	1802	1528	-8	18
+3928	ISP	TPA	907	634	-28	-1
+534	JAN	BWI	1148	831	8	1
+3244	JAN	BWI	1806	1450	21	15
+186	JAN	HOU	2354	2245	304	315
+971	JAN	HOU	724	615	-11	0
+2124	JAN	HOU	1303	1150	-2	5
+3154	JAN	HOU	2135	2025	35	45
+1035	JAN	MCO	1314	1038	49	53
+205	JAN	MDW	2123	1900	38	10
+449	JAN	MDW	851	700	-9	0
+3430	JAX	BHM	959	948	19	23
+1580	JAX	BNA	725	646	30	26
+2195	JAX	BNA	1136	1110	26	30
+2804	JAX	BNA	1603	1535	-7	0
+3428	JAX	BNA	1942	1919	-8	4
+433	JAX	BWI	1245	1053	5	-2
+1331	JAX	BWI	1623	1433	-2	-7
+3504	JAX	BWI	2158	2015	3	5
+378	JAX	FLL	2244	2139	4	9
+640	JAX	FLL	1602	1500	-13	0
+1396	JAX	FLL	1000	850	0	0
+2189	JAX	FLL	752	646	-3	1
+3312	JAX	FLL	1328	1221	-2	1
+3948	JAX	FLL	1841	1738	1	8
+54	JAX	HOU	1936	1813	31	38
+2272	JAX	IND	1001	802	6	12
+549	JAX	ORF	1946	1820	-9	-5
+3604	JAX	ORF	953	821	8	1
+23	JAX	PHL	1941	1734	36	44
+1232	JAX	PHL	926	712	11	12
+977	JAX	TPA	1410	1318	10	8
+1574	JAX	TPA	1052	958	62	58
+2019	JAX	TPA	1950	1859	5	9
+500	LAS	ABQ	1753	1538	43	53
+778	LAS	ABQ	1151	933	-9	-2
+890	LAS	ABQ	102	2248	77	83
+1171	LAS	ABQ	1550	1327	50	57
+1320	LAS	ABQ	846	624	-4	-1
+1925	LAS	ABQ	1833	1614	8	14
+2457	LAS	ABQ	2136	1917	-4	2
+302	LAS	ALB	148	1832	78	97
+1079	LAS	AMA	1633	1229	38	34
+155	LAS	AUS	1724	1256	4	16
+2021	LAS	AUS	144	2118	54	63
+3222	LAS	AUS	1334	905	4	15
+1018	LAS	BDL	114	1739	49	59
+3948	LAS	BHM	1426	906	-4	1
+249	LAS	BNA	1339	816	-1	1
+419	LAS	BNA	1841	1325	31	45
+2032	LAS	BNA	2030	1506	20	26
+3940	LAS	BNA	155	2039	60	69
+71	LAS	BOI	1209	924	-1	4
+538	LAS	BOI	1849	1611	24	36
+2383	LAS	BUF	117	1824	52	69
+Time taken: 0.147 seconds, Fetched: 100 row(s)
+hive> exit;
+hduser@adminpc-Vostro-14-5459:/usr/local/hive/bin$ stop-dfs.sh
+Stopping namenodes on [localhost]
+Stopping datanodes
+Stopping secondary namenodes [adminpc-Vostro-14-5459]
+2023-04-25 19:38:06,232 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@adminpc-Vostro-14-5459:/usr/local/hive/bin$ stop-yarn.sh
+Stopping nodemanagers
+Stopping resourcemanager
+hduser@adminpc-Vostro-14-5459:/usr/local/hive/bin$ cd
+hduser@adminpc-Vostro-14-5459:~$ 
+
+
